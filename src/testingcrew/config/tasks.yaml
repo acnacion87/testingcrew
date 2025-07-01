@@ -1,0 +1,41 @@
+create_business_requirements_task:
+  description: >
+    Think in a step by step approach:
+      - Given a {url}, understand the structure and the interactions required to test the site.
+      - Create a Gherkin feature file containing one or more scenarios that describe the business requirements.
+      - Review the content you got and refine scenarios as needed.
+      - Return **ONLY** the Gherkin feature file, **DO NOT** include additional texts, reasonings, etc.
+  expected_output: >
+    Gherkin feature file containing one or more scenarios that describe the business requirements.
+  agent: product_owner
+
+generate_selectors_task:
+  description: >
+    Using the context you have, generate the selectors for the elements that need to be interacted with.
+  expected_output: >
+    JSON file containing a single object where each key is a descriptive name for the element.
+    The value for each key will be a JSON object that describes the strategy to find the element.
+    The JSON object should contain the following keys:
+      - value: The value of the selector.
+      - strategy: The strategy to use to find the element (e.g. role, label, css, xpath, etc.).
+      - description: A description of the element.
+  agent: ui_tester
+  context:
+    - create_business_requirements_task
+
+test_generation_task:
+  description: >
+    Think in a step by step approach to generate the test scripts:
+      - Review the context you got and generate the Playwright test scripts
+      to test the interactions with the elements on the given {url}. 
+      - Study the Playwright-BDD documentation using the tool "Search a Code Docs content" to understand the framework.
+      - Refactor the generated  test scripts to be in TypeScript format
+      and to use Playwright-BDD to follow BDD style of testing.
+      - It should read the selectors from the selectors JSON configuration file: selectors.json.
+    Return only the source code of the test script, no other text.
+    **DO NOT** wrap the code in markdown code formatter.
+  expected_output: >
+    Full source code of a Playwright-BDD test script to thest the given {url}.
+    Return only the source code of the test script, no other text.
+    **DO NOT** wrap the code in markdown code formatter.
+  agent: playwright_tester

@@ -1,0 +1,24 @@
+{
+  "selectors": {
+    "username_field": {
+      "value": "input[data-test='username']",
+      "strategy": "css",
+      "description": "The input field for the username on the login page."
+    },
+    "password_field": {
+      "value": "input[data-test='password']",
+      "strategy": "css",
+      "description": "The input field for the password on the login page."
+    },
+    "login_button": {
+      "value": "input[data-test='login-button']",
+      "strategy": "css",
+      "description": "The button to submit the login form."
+    },
+    "error_message": {
+      "value": "h3[data-test='error']",
+      "strategy": "css",
+      "description": "The error message displayed when login fails."
+    }
+  }
+}
